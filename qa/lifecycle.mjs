@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {parseCSV,exportCSV} from '../csv.js';
+import {examples} from '../data.js';
+const els=new Map(); let focused='',downloadBlob;
+const el=key=>{if(!els.has(key))els.set(key,{value:'',innerHTML:'',textContent:'',disabled:false,classList:{toggle(){}},setAttribute(){},focus(){focused=key},scrollIntoView(){},click(){this.onclick?.()},dataset:{}});return els.get(key)};
+globalThis.document={querySelector:el,createElement:()=>({click(){}}),querySelectorAll(q){if(q==='[data-route]'||q==='[data-confirm]'||q==='[data-undo]'){const name=q.slice(1,-1), key=name.slice(5);return [...el('#queue').innerHTML.matchAll(new RegExp(name+'="(\\d+)"','g'))].map(m=>{const e=el(`[${name}="${m[1]}"]`);e.dataset[key]=m[1];return e})}return []}};
+globalThis.confirm=()=>true;globalThis.matchMedia=()=>({matches:true});globalThis.location={reload(){}};
+URL.createObjectURL=b=>{downloadBlob=b;return 'blob:test'};URL.revokeObjectURL=()=>{};
+await import('../app.js');
+el('#demo').onclick();assert.match(el('#queueSummary').textContent,/model v1/);
+el('#train').onclick();assert.match(el('#metricsContent').innerHTML,/v2/);assert.match(el('#metricsContent').innerHTML,/not new independent validation/);
+el('#requestText').value='A user-provided pantry delivery request';el('#addRequest').onclick();const select=el('[data-route="6"]');select.value='Food support';select.onchange();el('[data-confirm="6"]').onclick();assert.equal(focused,'[data-undo="6"]');
+el('#retrain').onclick();el('#export').onclick();const rows=parseCSV(await downloadBlob.text());assert.equal(rows[0].data_origin,'user_provided');assert.equal(rows[0].model_version,'2');assert.match(el('#queueSummary').textContent,/model v3/);
+el('[data-undo="6"]').onclick();assert.equal(focused,'[data-route="6"]');assert.equal(el('#export').disabled,true);el('#retrain').onclick();assert.match(el('#queueSummary').textContent,/model v4/);
+let resolve;const delayed=new Promise(r=>resolve=r);const read=el('#examplesFile').onchange({target:{files:[{size:100,text:()=>delayed}],value:'file'}});el('#demo').onclick();resolve(exportCSV(examples.map(r=>({...r,label:'changed '+r.label}))));await read;assert.equal(el('#datasetBadge').textContent,'Synthetic sample workspace');assert.doesNotMatch(el('#exampleSummary').innerHTML,/changed/);
+const hold=el('[data-route="4"]');hold.value='';hold.selectedOptions=[{dataset:{hold:'true'}}];hold.onchange();assert.equal(el('[data-confirm="4"]').disabled,false);el('[data-confirm="4"]').onclick();el('#export').onclick();const held=parseCSV(await downloadBlob.text());assert.equal(held[0].label,'');assert.equal(held[0].review_status,'needs_follow_up');el('#retrain').onclick();assert.match(el('#notice').textContent,/trained on 36 examples/);
+console.log('PASS lifecycle simulation: monotonic version, fixed holdout warning, reviewed version, row origin, undo/retrain, keyboard focus hooks, stale upload ignored');

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
+import {summarizeDiagnostics,renderDiagnostics} from '../diagnostics.js';
+import {splitExamples,fit,predict,evaluate} from '../model.js';import {examples,requests} from '../data.js';
+const baseline=JSON.parse(readFileSync(new URL('./v2-baseline.json',import.meta.url),'utf8'));
+const s=splitExamples(examples),model=fit(s.train);const snapshot=()=>JSON.stringify({classes:[...model.classes].map(([l,c])=>[l,{...c,words:[...c.words]}]),vocab:[...model.vocab],n:model.n});const before=snapshot();
+const d=summarizeDiagnostics(s.test,text=>predict(model,text)),html=renderDiagnostics(d);
+assert.deepEqual({train:s.train,test:s.test,metrics:evaluate(model,s.test),predictions:[...requests,...s.test.map(r=>r.text)].map(t=>predict(model,t))},baseline,'v2 must preserve complete v1 model/split predictions');assert.equal(snapshot(),before,'diagnostics must not mutate model');
+assert.equal(d.misses.length,s.test.length-evaluate(model,s.test).correct);assert.equal(d.matches.length,evaluate(model,s.test).correct);
+for(const p of d.pairs)assert.equal(p.count,evaluate(model,s.test).confusion[p.expected][p.suggested]);assert.equal(d.pairs.reduce((n,p)=>n+p.count,0),d.misses.length);
+assert.ok(html.indexOf('Inspect mismatches first')<html.indexOf('<details>'));assert.doesNotMatch(html,/<(?:button|input|select|a)\b/,'diagnostics must not expose training/copy actions');assert.match(html,/not verified ground truth/);assert.match(html,/Do not copy check-set rows into training/);
+const frozen=Object.freeze([Object.freeze({text:'evil <svg onload="boom"> & apostrophe\' newline\n',label:'constructor'}),Object.freeze({text:'second',label:'__proto__'}),Object.freeze({text:'third',label:'constructor'})]);let calls=0;
+const dd=summarizeDiagnostics(frozen,()=>{calls++;return Object.freeze({scores:Object.freeze([Object.freeze({label:'<i>bad</i>'})])})});assert.equal(calls,3);assert.equal(dd.pairs[0].count,2);assert.equal(dd.pairs[0].expected,'constructor');const hh=renderDiagnostics(dd);assert.doesNotMatch(hh,/<svg|<i>bad/);assert.match(hh,/&lt;svg/);assert.match(hh,/&lt;i&gt;bad/);
+const zero=renderDiagnostics(summarizeDiagnostics([{text:'a',label:'x'}],()=>({scores:[{label:'x'}]})));assert.match(zero,/0 of 1/);assert.match(zero,/does not establish reliability/);assert.doesNotMatch(zero,/Observed confusion pairs/);
+assert.match(renderDiagnostics(summarizeDiagnostics([],()=>assert.fail('empty set should not invoke prediction'))),/No held-out requests/);
+console.log('PASS v2 invariance, confusion counts, mismatch order, escaping, no leakage actions, zero/empty evaluation');
