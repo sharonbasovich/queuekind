@@ -1,0 +1,47 @@
+name: Capture real QueueKind workflow
+on: workflow_dispatch
+permissions:
+  contents: read
+concurrency:
+  group: queuekind-capture
+  cancel-in-progress: false
+jobs:
+  capture:
+    # Explicitly avoid paid/private-repository execution; no secrets or write token.
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Verify and build actual application
+        run: npm test && npm run build
+      - name: Install capture-only pinned dependencies
+        run: npm ci --ignore-scripts --prefix capture && ./capture/node_modules/.bin/playwright install --with-deps chromium
+      - name: Record real synthetic workflow and verify imports/exports
+        run: |
+          mkdir -p capture-output
+          node capture/serve.mjs > /tmp/queuekind-capture-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do curl --fail --silent http://127.0.0.1:4173/ > /dev/null && break; sleep 1; done
+          curl --fail --silent http://127.0.0.1:4173/ > /dev/null
+          QUEUEKIND_FILM=1 node capture/record.mjs
+      - if: always()
+        run: |
+          mkdir -p capture-output
+          cp capture/package-lock.json capture-output/capture-package-lock.json
+          cp capture/runtime-manifest.json capture-output/runtime-manifest.json
+          cp capture/captions-plan.srt capture-output/captions-plan.srt
+          cp /tmp/queuekind-capture-server.log capture-output/server.log 2>/dev/null || true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: queuekind-actual-workflow-${{ github.sha }}
+          retention-days: 3
+          path: capture-output/
+          if-no-files-found: warn

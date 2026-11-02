@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:08,000
+QueueKind: a little help, a human decision.
+A silent demonstration using invented requests.
+
+2
+00:00:08,000 --> 00:00:15,000
+48 synthetic examples. Six requests to review.
+No requests are routed automatically.
+
+3
+00:00:15,000 --> 00:00:27,000
+Check held-out examples before trusting suggestions.
+These small synthetic results do not establish reliability.
+
+4
+00:00:27,000 --> 00:00:42,000
+Inspect actual mismatches, not just an accuracy number.
+Expected labels can also be wrong.
+
+5
+00:00:42,000 --> 00:01:00,000
+No suitable route? Hold the request for follow-up.
+Held requests are excluded from training.
+
+6
+00:01:00,000 --> 00:01:16,000
+Read the request and choose a route yourself.
+Model scores are not calibrated probabilities.
+
+7
+00:01:16,000 --> 00:01:27,000
+Export only reviewed decisions, including held requests.
+The downloaded CSV is checked against the visible choices.
+
+8
+00:01:27,000 --> 00:01:40,000
+Apply the routed review, keeping held-out examples separate.
+This is the same check set, not new independent validation.
+
+9
+00:01:40,000 --> 00:01:52,000
+Word-count suggestions have limits. Every request needs review.
+No sending, urgency scoring or service-eligibility decisions.

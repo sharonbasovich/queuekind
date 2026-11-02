@@ -1,0 +1,10 @@
+{
+  "name": "queuekind-capture",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "description": "CI-only capture of the actual QueueKind app with synthetic fixtures",
+  "devDependencies": {
+    "@playwright/test": "1.51.1"
+  }
+}

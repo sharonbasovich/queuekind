@@ -22,3 +22,5 @@ Source includes reduced-motion support. No physical mobile-device test, screen-r
 Actual browser file-picker import has not been verified. Parser edge cases and stale file-read behavior have automated coverage, but this is not a substitute for end-to-end upload testing. Export confirmation was exercised in the browser; exact serialization was checked by automated tests rather than inspecting browser download bytes.
 
 Synthetic results in README.md do not establish real-world accuracy. A high relative score can still be wrong. Repeated checks after tuning are not independent validation. No production-readiness claim is made.
+
+Independent actual Chrome verification on November2,2026 passed the hold-only state fix: holds alone do not enable learning; routed review changes do; undoing an applied route enables a baseline rebuild; rebuilding restores36 training examples. This is scripted synthetic workflow verification, not a user study.

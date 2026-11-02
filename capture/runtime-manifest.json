@@ -1,0 +1,13 @@
+{
+  "reviewedAppCommit": "123cb39105e9bb368439d253922ca853c15c4044",
+  "algorithm": "sha256",
+  "files": {
+    "index.html": "db17294898fed174506e6371091accfa12d64b2a964e783d8e31e7d0000dd5f2",
+    "app.js": "24346ce38bf2dc1cc0110b4f769b8e0f80a2a5d68c75cc07e947cdbf74b82f07",
+    "model.js": "f34ffdd6c618c36786727c9520e776aed3ed8c02137ae5cd0084f2a1eb439f0f",
+    "csv.js": "0e441b516740ad4db74849394338d104083da36a7d40a55685bc19e473f498e5",
+    "data.js": "c0d46dacfa266df85282ae3989a90f11ca5f16b0e86c5d4616b057a35c2a1da4",
+    "diagnostics.js": "8e0bcc5bf912fab8c4a421273a937e27dda06feee649711401a4d18cace68516",
+    "style.css": "bac07bda5ec8c21ba0fcb5c0c697bc62352ba1ff784e47380805a2ad9185ad3d"
+  }
+}
