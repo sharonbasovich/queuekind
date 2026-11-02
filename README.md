@@ -22,6 +22,7 @@ node qa/adversarial.mjs
 node qa/correction.mjs
 node qa/lifecycle.mjs
 node qa/diagnostics-v2.mjs
+node qa/evaluation/run.mjs
 npm run build
 ```
 
@@ -47,6 +48,10 @@ These are small synthetic evaluations, not evidence of operational reliability:
 | Starter split: 36 training, 12 held-out | 7/12 suggestions match supplied labels; macro F1 about 58% |
 | Separately prepared 60-case synthetic evaluation: 32 clear-intent cases | 23/32 match supplied labels |
 | Same evaluation: 12 negation/contrast cases | 8/12 match supplied labels |
+
+The same evaluation flags 22/32 clear-intent cases, 12/12 negation cases, 6/8 mixed-intent cases and 8/8 out-of-scope cases for closer review. Mixed and out-of-scope cases have no single expected route and are not scored for routing accuracy.
+
+Reproduce these results with `node qa/evaluation/run.mjs`. The [frozen cases](qa/evaluation/cases.json), [computed results](qa/evaluation/results.json) and [evaluation provenance](qa/evaluation/PROVENANCE.md) are included. The set was engineer-blind when frozen, not fully double-blind; its author inherited earlier failure context. Now that cases are public, they are not a fresh blind test for future tuning.
 
 The remaining 16 cases assess other situations; the table is not an overall 60-case accuracy claim. Cases were not added to training. All labels are evaluation annotations, not verified ground truth. Warning heuristics can flag otherwise clear requests and miss difficult ones: warnings create a real review burden, not a calibrated safety guarantee. Every request requires human review, including high-scoring requests without warnings.
 

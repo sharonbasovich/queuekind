@@ -1,0 +1,949 @@
+{
+  "casesSha256": "ec565c0abb8622b376c4255a4653365f3446af71f203ee72b0a3fb1cd82f7995",
+  "trainingExamples": 36,
+  "summary": {
+    "clear": {
+      "n": 32,
+      "labeled": 32,
+      "correct": 23,
+      "flagged": 22,
+      "wrongUnflagged": 0
+    },
+    "negation": {
+      "n": 12,
+      "labeled": 12,
+      "correct": 8,
+      "flagged": 12,
+      "wrongUnflagged": 0
+    },
+    "mixed": {
+      "n": 8,
+      "labeled": 0,
+      "correct": null,
+      "flagged": 6,
+      "wrongUnflagged": null
+    },
+    "oos": {
+      "n": 8,
+      "labeled": 0,
+      "correct": null,
+      "flagged": 8,
+      "wrongUnflagged": null
+    }
+  },
+  "fixtureCollisions": 0,
+  "results": [
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "Our cupboard is empty until payday. Where can we collect a food parcel?",
+      "mustFlag": false,
+      "id": "blind-01",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.725474481457444,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "Can the pantry provide vegetarian meals for two adults this week?",
+      "mustFlag": false,
+      "id": "blind-02",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.844036550661153,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "I am looking for a grocery box with rice, beans and fresh vegetables.",
+      "mustFlag": false,
+      "id": "blind-03",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.64335638785352,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "My family needs help putting dinner on the table tonight.",
+      "mustFlag": false,
+      "id": "blind-04",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.3376145846622364,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "Are there any free lunch portions available at the community kitchen?",
+      "mustFlag": false,
+      "id": "blind-05",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.37715005154455267,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "We have run out of baby food and need assistance finding some.",
+      "mustFlag": false,
+      "id": "blind-06",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.48726252707184253,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "Could you reserve a weekly food hamper for our household?",
+      "mustFlag": false,
+      "id": "blind-07",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.9473740754368913,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Food support",
+      "text": "Is there a place to pick up bread and other basic groceries?",
+      "mustFlag": false,
+      "id": "blind-08",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.7812289431088288,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "Could a driver take me to the community centre on Thursday?",
+      "mustFlag": false,
+      "id": "blind-09",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.8288030885799419,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "I use a wheelchair and need an accessible ride across town.",
+      "mustFlag": false,
+      "id": "blind-10",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.8027569807913086,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "The bus route has been cancelled; can someone arrange my return trip?",
+      "mustFlag": false,
+      "id": "blind-11",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.9090404789683211,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "I need a lift to my appointment and a way home afterwards.",
+      "mustFlag": false,
+      "id": "blind-12",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.7306947604552285,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "Can your transport service collect me from the station?",
+      "mustFlag": false,
+      "id": "blind-13",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.504330166585356,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "Please help me find a shuttle to the centre tomorrow morning.",
+      "mustFlag": false,
+      "id": "blind-14",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.8280904291681102,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "My car broke down and I cannot get to the scheduled session.",
+      "mustFlag": false,
+      "id": "blind-15",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.3387350698586379,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Transport",
+      "text": "Is a volunteer driver available for a short passenger journey?",
+      "mustFlag": false,
+      "id": "blind-16",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.4096708300303289,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "We have twenty clean winter jackets to give to the centre.",
+      "mustFlag": false,
+      "id": "blind-17",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.8592141732898699,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "Where should I drop off unused blankets for families?",
+      "mustFlag": false,
+      "id": "blind-18",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.8314567745572721,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "Our shop would like to donate unopened household supplies.",
+      "mustFlag": false,
+      "id": "blind-19",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.41076038649658125,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "Can you accept a financial contribution towards your work?",
+      "mustFlag": false,
+      "id": "blind-20",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.4014274161838133,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "I have spare school bags and would like to pass them on.",
+      "mustFlag": false,
+      "id": "blind-21",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.5032406087511521,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "There are several boxes of new socks ready for collection as a gift.",
+      "mustFlag": false,
+      "id": "blind-22",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.5058917613484817,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "Our office is offering surplus laptops for your organization.",
+      "mustFlag": false,
+      "id": "blind-23",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.25,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Donations",
+      "text": "Please send instructions for donating a working refrigerator.",
+      "mustFlag": false,
+      "id": "blind-24",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.25,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "I would like to sign up for a Saturday volunteer shift.",
+      "mustFlag": false,
+      "id": "blind-25",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.9325762534499771,
+      "flagged": false,
+      "reasons": [],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "Can I help sort supplies at the centre after work?",
+      "mustFlag": false,
+      "id": "blind-26",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.5381615632876763,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "I have a few free hours and want to join your volunteer team.",
+      "mustFlag": false,
+      "id": "blind-27",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.6205356836197355,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "Do you need someone to greet visitors at reception?",
+      "mustFlag": false,
+      "id": "blind-28",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.3113366372900334,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "I can assist with setting up tables for next week’s event.",
+      "mustFlag": false,
+      "id": "blind-29",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.3812165572570534,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "How do I apply to be a regular community volunteer?",
+      "mustFlag": false,
+      "id": "blind-30",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.5438638523717347,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "Please add me to the rota for packing grocery boxes.",
+      "mustFlag": false,
+      "id": "blind-31",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.3783051295124488,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": false
+    },
+    {
+      "category": "clear",
+      "expected": "Volunteering",
+      "text": "I am available to help clean the hall on Sunday.",
+      "mustFlag": false,
+      "id": "blind-32",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.41209054395220396,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Food support",
+      "text": "I am not offering supplies; I need groceries for my own household.",
+      "mustFlag": true,
+      "id": "blind-33",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.7826279893275697,
+      "flagged": true,
+      "reasons": [
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Food support",
+      "text": "I cannot take a volunteer shift. What I need is a food box to collect.",
+      "mustFlag": true,
+      "id": "blind-34",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.48583379372261887,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Food support",
+      "text": "Please do not book a driver. I can walk there, but I need a meal.",
+      "mustFlag": true,
+      "id": "blind-35",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.3591597351702632,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": false
+    },
+    {
+      "category": "negation",
+      "expected": "Transport",
+      "text": "I do not need a food parcel; I need a ride to the centre.",
+      "mustFlag": true,
+      "id": "blind-36",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.4588812786230858,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Transport",
+      "text": "I am not donating my car. I need somebody to drive me home.",
+      "mustFlag": true,
+      "id": "blind-37",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.7763261390440722,
+      "flagged": true,
+      "reasons": [
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Transport",
+      "text": "Rather than volunteering today, I need help arranging passenger transport.",
+      "mustFlag": true,
+      "id": "blind-38",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.5985593721856627,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Donations",
+      "text": "I am not asking for meals. I want to give you our spare kitchen equipment.",
+      "mustFlag": true,
+      "id": "blind-39",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.6499242330254603,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Donations",
+      "text": "I cannot volunteer my time, but I can donate several coats.",
+      "mustFlag": true,
+      "id": "blind-40",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.4498381554718505,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": false
+    },
+    {
+      "category": "negation",
+      "expected": "Donations",
+      "text": "Do not arrange a ride for me; please tell me where to donate money.",
+      "mustFlag": true,
+      "id": "blind-41",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.6517133877187274,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": false
+    },
+    {
+      "category": "negation",
+      "expected": "Volunteering",
+      "text": "I am not requesting a grocery box. I want to help pack boxes for other people.",
+      "mustFlag": true,
+      "id": "blind-42",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.36767917025965774,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": false
+    },
+    {
+      "category": "negation",
+      "expected": "Volunteering",
+      "text": "I have no items to donate, but I can work a volunteer shift.",
+      "mustFlag": true,
+      "id": "blind-43",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.5427547746532883,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "negation",
+      "expected": "Volunteering",
+      "text": "I do not need passenger transport. I would like to volunteer at reception.",
+      "mustFlag": true,
+      "id": "blind-44",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.5295428879179538,
+      "flagged": true,
+      "reasons": [
+        "Routes are close",
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": true
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "I need groceries and someone to drive me to collect them.",
+      "mustFlag": true,
+      "id": "blind-45",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.4182265284942388,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "I would like to donate blankets and also sign up for a volunteer shift.",
+      "mustFlag": true,
+      "id": "blind-46",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.851136376673218,
+      "flagged": false,
+      "reasons": [],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "Can you arrange a ride and reserve a meal for me?",
+      "mustFlag": true,
+      "id": "blind-47",
+      "fixtureCollision": false,
+      "predicted": "Transport",
+      "relativeScore": 0.7872293815159455,
+      "flagged": false,
+      "reasons": [],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "Our group can give supplies and help unload deliveries.",
+      "mustFlag": true,
+      "id": "blind-48",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.31089861283480497,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "I need a food hamper, and my sister wants to volunteer.",
+      "mustFlag": true,
+      "id": "blind-49",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.663474844311769,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "I have a donation to drop off but need transport to reach you.",
+      "mustFlag": true,
+      "id": "blind-50",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.753177461686849,
+      "flagged": true,
+      "reasons": [
+        "Negation or contrast detected — read the whole request"
+      ],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "Could I join the volunteer rota and contribute some money too?",
+      "mustFlag": true,
+      "id": "blind-51",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.46138289237842856,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "mixed",
+      "expected": null,
+      "text": "We need meals and accessible passenger transport for our household.",
+      "mustFlag": true,
+      "id": "blind-52",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.480665074927595,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "How do I reset the password for my online account?",
+      "mustFlag": true,
+      "id": "blind-53",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.4080826708943102,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "The bathroom tap has been leaking since Monday.",
+      "mustFlag": true,
+      "id": "blind-54",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.25,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "Could you explain the rules for renewing a passport?",
+      "mustFlag": true,
+      "id": "blind-55",
+      "fixtureCollision": false,
+      "predicted": "Food support",
+      "relativeScore": 0.3937051311679502,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "I want to appeal a parking ticket issued yesterday.",
+      "mustFlag": true,
+      "id": "blind-56",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.2901878646153723,
+      "flagged": true,
+      "reasons": [
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "What is the weather forecast for next weekend?",
+      "mustFlag": true,
+      "id": "blind-57",
+      "fixtureCollision": false,
+      "predicted": "Volunteering",
+      "relativeScore": 0.3387350698586379,
+      "flagged": true,
+      "reasons": [
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "Please recommend a film for our family movie night.",
+      "mustFlag": true,
+      "id": "blind-58",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.25,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "My phone screen is broken and I need repair advice.",
+      "mustFlag": true,
+      "id": "blind-59",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.25,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    },
+    {
+      "category": "oos",
+      "expected": null,
+      "text": "When will the local election results be published?",
+      "mustFlag": true,
+      "id": "blind-60",
+      "fixtureCollision": false,
+      "predicted": "Donations",
+      "relativeScore": 0.25,
+      "flagged": true,
+      "reasons": [
+        "Too few familiar words",
+        "Mostly unfamiliar wording",
+        "Routes are close"
+      ],
+      "correct": null
+    }
+  ]
+}
