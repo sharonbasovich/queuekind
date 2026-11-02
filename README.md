@@ -2,6 +2,8 @@
 
 A browser-local administrative request-routing workbench for volunteer teams. Train a small, transparent text classifier from labeled examples, inspect where it fails, and review every request before exporting a decision.
 
+[Try the public demo](https://sharonbasovich.github.io/queuekind/) with its synthetic sample. Every request still requires human review. The hosted page downloads app assets over the network; request text is processed locally in your browser, not sent to a model service.
+
 **This is an experimental human-review aid, not an autonomous routing system.** It does not assess urgency, service eligibility or priority, and is not an emergency-response or clinical tool.
 
 ## Try it locally
