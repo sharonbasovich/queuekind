@@ -83,7 +83,14 @@ try{
  await page.locator('#diagnostic-title').scrollIntoViewIfNeeded();
  assert.equal(await page.locator('.diagnostics > .diagnostic-list .diagnostic-case').count(),baseline.total-baseline.correct);
  assert.match(await page.locator('.diagnostics').innerText(),/not verified ground truth/);
- event('actual-mismatches-inspected',{count:baseline.total-baseline.correct});await shot('03-mismatches');await at(42);
+ event('actual-confusion-pairs-visible',{count:baseline.total-baseline.correct});await shot('03a-confusion-pairs');await at(32);
+ const firstMismatch=page.locator('.diagnostics > .diagnostic-list .diagnostic-case').first();
+ await firstMismatch.scrollIntoViewIfNeeded();
+ await expect(firstMismatch).toBeInViewport({ratio:1});
+ await expect(firstMismatch.locator('.diagnostic-route')).toContainText('Expected label');
+ await expect(firstMismatch.locator('.diagnostic-route')).toContainText('Suggested route');
+ await expect(firstMismatch.locator('.small-note')).not.toHaveText('');
+ event('actual-mismatch-case-visible',{caseText:await firstMismatch.innerText()});await shot('03-mismatches');await at(42);
  await page.locator('#tab-review').click();
  const unsupported=page.locator('.request-card').filter({hasText:requests[4]});
  await unsupported.scrollIntoViewIfNeeded();await shot('04-unsupported-before');await at(49);
@@ -110,7 +117,11 @@ try{
  assert.equal(held.label,'');assert.equal(held.review_status,'needs_follow_up');
  assert.deepEqual(rows.map(r=>String(r.model_version)),['1','1']);
  exportEvidence={sha256:sha(bytes),bytes:bytes.length,rows:2,routed:1,held:1};
- event('actual-downloaded-export-verified',exportEvidence);await shot('07-export');await at(87);
+ event('actual-downloaded-export-verified',exportEvidence);
+ await expect(page.locator('#notice')).toContainText('Exported 2 reviewed requests');
+ await page.locator('#notice').scrollIntoViewIfNeeded();
+ await expect(page.locator('#notice')).toBeInViewport({ratio:1});
+ event('export-confirmation-visible');await shot('07-export');await at(87);
  await page.locator('#retrain').click();
  assert.match(await page.locator('#queueSummary').innerText(),/model v2/);
  assert.equal(await page.locator('#retrain').isDisabled(),true);
@@ -119,7 +130,7 @@ try{
  assert.match(await page.locator('#metricsContent .warning').innerText(),/not new independent validation/);
  assert.match(await page.locator('.metric').nth(3).innerText(),/37 training examples/);
  event('reviewed-route-learned-held-request-excluded',{trainingExamples:37,heldout:12});await shot('08-retrained');await at(100);
- await page.locator('.guidance').scrollIntoViewIfNeeded();event('visible-model-limitations');await shot('09-limitations');await at(112);
+ await page.locator('#metricsContent .guidance').scrollIntoViewIfNeeded();event('visible-model-limitations');await shot('09-limitations');await at(112);
  assert.deepEqual(errors,[]);assert.deepEqual(externalRequests,[]);
  const elapsedSeconds=(performance.now()-started)/1000;
  if(film)assert.ok(elapsedSeconds>=112&&elapsedSeconds<125,`Timing drift: ${elapsedSeconds}`);
