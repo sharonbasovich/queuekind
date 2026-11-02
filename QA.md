@@ -2,9 +2,10 @@
 
 ## Automated checks
 
-- 18 built-in Node tests cover deterministic splits, prediction behavior, held-out exclusion, correction integrity, CSV escaping and formula neutralization, warning thresholds and read-only diagnostics.
+- 19 built-in Node tests cover deterministic splits, prediction behavior, held-out exclusion, correction integrity, CSV escaping and formula neutralization, warning thresholds and read-only diagnostics.
 - 22 additional adversarial checks cover malformed CSV, reserved labels, duplicate feature leakage and low-support predictions.
 - Correction-integrity checks verify conflicting reviewed labels and missing-class evaluation behavior.
+- A focused review-state regression verifies hold-only, mixed/routed, already-applied and undone reviews: only routed decision changes enable learning; held decisions remain exportable.
 - A simulated DOM lifecycle test covers model versioning, fixed holdout disclosure, review-time export version, per-request provenance, undo/retrain, focus restoration hooks and stale asynchronous imports.
 - Diagnostic invariance tests compare split, predictions and metrics to a frozen baseline, verify confusion counts, hostile-label escaping, empty/zero-mismatch handling and absence of training actions.
 
