@@ -20,9 +20,12 @@ jobs:
           node capture/serve.mjs &
           for i in $(seq 1 20); do curl --fail --silent http://127.0.0.1:4173/ >/dev/null && break; sleep 1; done
           node capture/filters.mjs
+          QUEUEKIND_VERIFY_CURRENT=1 node capture/record.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: review-filters-${{ github.sha }}
-          path: filter-output/
+          path: |
+            filter-output/
+            capture-output/
           retention-days: 3
