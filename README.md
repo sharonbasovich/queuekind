@@ -86,3 +86,9 @@ QueueKind was developed with AI-assisted implementation, test generation and ind
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+### Recover from a mistaken queue addition
+
+Unreviewed requests have a **Remove request** action. Confirm the specific request number to remove it, or cancel without changing its draft route choice. **Undo removal** restores the most recently removed request, including that choice, until another removal or session replacement. Request numbers are never reused within a session. Reviewed/held decisions cannot be removed without first undoing their review. Removing an unreviewed request never changes the trained model; apply any already-pending review changes separately.
+
+One queue slot is reserved while Undo removal is available, so incoming requests cannot make that recovery impossible at the 3,000-request limit. This is session-only recovery, not persistent storage; export reviewed work before closing or resetting.
