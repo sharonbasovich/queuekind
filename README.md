@@ -14,7 +14,7 @@ No API key, account, package installation or external dependency is needed. Use 
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8000 in your browser. ES modules need HTTP rather than opening the HTML directly. The runtime files are `index.html`, `style.css`, `app.js`, `model.js`, `csv.js`, `data.js` and `diagnostics.js`.
+Open http://127.0.0.1:8000 in your browser. ES modules need HTTP rather than opening the HTML directly. The runtime files are `index.html`, `style.css`, `app.js`, `model.js`, `csv.js`, `data.js` `diagnostics.js` and `queue-view.js`.
 
 With a recent Node.js installation, run the tests or create a static distribution:
 
@@ -28,7 +28,7 @@ node qa/evaluation/run.mjs
 npm run build
 ```
 
-The build copies seven runtime files into `dist/`. No dependency installation is required.
+The build copies eight runtime files into `dist/`. No dependency installation is required.
 
 ## A five-minute walkthrough
 
@@ -37,7 +37,8 @@ The build copies seven runtime files into `dist/`. No dependency installation is
 3. Open **Review**. Read the entire request and both suggestions. Model scores are not probabilities.
 4. Choose a route yourself and mark it reviewed. If no route fits, choose **Hold for follow-up / no suitable route**. A held request exports without a route and does not enter training.
 5. Undo a decision if needed. Retrain from reviewed routes, while the original check examples remain excluded. Repeated checks are not fresh independent validation.
-6. Export reviewed requests to CSV before reloading or closing the page.
+6. Use All, Awaiting review, Reviewed or Held to focus the queue. Counts and request numbers stay tied to the full queue. Unconfirmed choices survive filter changes; exports and learning still use all reviewed requests, including hidden ones.
+7. Export reviewed requests to CSV before reloading or closing the page.
 
 To use your own examples, import a CSV with `text,label` columns: at least two routes and six unique examples per route. New requests use a `text` column and optional `id`. Remove identifying or sensitive information first. A new route requires a suitable imported training set, not a one-example class added during review.
 
