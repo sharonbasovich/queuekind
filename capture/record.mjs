@@ -16,10 +16,12 @@ assert.equal(examples.length,48);assert.equal(requests.length,6);
 const split=splitExamples(examples),baseline=evaluate(fit(split.train),split.test);
 await fs.mkdir(out,{recursive:true});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-const runtimeManifest=JSON.parse(await fs.readFile(new URL('./runtime-manifest.json',import.meta.url),'utf8'));
+const verifyCurrent=process.env.QUEUEKIND_VERIFY_CURRENT==='1';
+assert.ok(!(verifyCurrent&&process.env.QUEUEKIND_FILM==='1'),'Current verification must not produce a film');
+const runtimeManifest=JSON.parse(await fs.readFile(new URL(verifyCurrent?'./verification-manifest.json':'./runtime-manifest.json',import.meta.url),'utf8'));
 assert.equal(runtimeManifest.algorithm,'sha256');
-assert.equal(runtimeManifest.reviewedAppCommit,'123cb39105e9bb368439d253922ca853c15c4044');
-const sourceHashes={};for(const file of ['index.html','app.js','model.js','csv.js','data.js','diagnostics.js','style.css']){
+assert.equal(runtimeManifest.reviewedAppCommit,verifyCurrent?'b11a74825e91b0f1b955adb0e1bdb450e0cca440':'123cb39105e9bb368439d253922ca853c15c4044');
+const sourceHashes={};for(const file of ['index.html','app.js','model.js','csv.js','data.js','diagnostics.js','style.css',...(verifyCurrent?['queue-view.js']:[])]){
  const source=await fs.readFile(path.join(root,file)),built=await fs.readFile(path.join(root,'dist',file));
  assert.equal(sha(source),sha(built),`Build differs from source: ${file}`);sourceHashes[file]=sha(source);assert.equal(sourceHashes[file],runtimeManifest.files[file],`Unreviewed runtime changed: ${file}`);
 }
