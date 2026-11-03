@@ -24,3 +24,11 @@ Actual browser file-picker import has not been verified. Parser edge cases and s
 Synthetic results in README.md do not establish real-world accuracy. A high relative score can still be wrong. Repeated checks after tuning are not independent validation. No production-readiness claim is made.
 
 Independent actual Chrome verification on November2,2026 passed the hold-only state fix: holds alone do not enable learning; routed review changes do; undoing an applied route enables a baseline rebuild; rebuilding restores36 training examples. This is scripted synthetic workflow verification, not a user study.
+
+## November 3: recover from mistaken queue additions
+
+Added confirmed removal of unreviewed requests and one-step undo. Reviewed/held decisions are protected; display numbers remain stable and are not reused. Undo preserves draft choices, reveals the restored row if filters hid it, and focuses its decision control. A reserved capacity slot prevents new additions from blocking recovery.
+
+Verification: 22 Node tests including full-capacity, cancellation, second removal, session replacement, repeated undo, export-byte and model invariance. Existing adversarial, correction, lifecycle, diagnostics and 60-case synthetic evaluation remain unchanged. Browser regression `capture/removal.mjs` covers 1280/390px, keyboard confirmation/cancel, empty queue/undo focus, filter recovery, numbering and reviewed CSV invariance. Native cloud-browser cancellation and confirmation/undo checked separately. No classifier changes, new dependencies, automatic persistence or external transmission.
+
+Exact event checked from QueueKind's Submitted To link on November 3: ML Empowerment Build Challenge 4.0; 44 participants (not a team/submission count), start November 1; use earlier rules deadline December 1, 21:00 Pacific rather than overview 23:45. Technical implementation 30%, UX 15%. Existing entry and historical video preserved.
