@@ -92,3 +92,7 @@ MIT. See [LICENSE](LICENSE).
 Unreviewed requests have a **Remove request** action. Confirm the specific request number to remove it, or cancel without changing its draft route choice. **Undo removal** restores the most recently removed request, including that choice, until another removal or session replacement. Request numbers are never reused within a session. Reviewed/held decisions cannot be removed without first undoing their review. Removing an unreviewed request never changes the trained model; apply any already-pending review changes separately.
 
 One queue slot is reserved while Undo removal is available, so incoming requests cannot make that recovery impossible at the 3,000-request limit. This is session-only recovery, not persistent storage; export reviewed work before closing or resetting.
+
+## Leaving a session
+
+QueueKind asks the browser to warn before leaving or reloading a nonempty session, including an unfinished request draft. Cancel the warning to keep working. Reset session has one explicit confirmation. Exporting reviewed decisions does not back up the remaining queue, trained model or draft, so it does not disable this warning. This is not persistence: browsers may suppress unload prompts, especially on mobile termination; keep original CSVs and export reviewed decisions before closing.
