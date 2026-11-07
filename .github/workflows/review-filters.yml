@@ -22,6 +22,7 @@ jobs:
           node capture/filters.mjs
           node capture/removal.mjs
           node capture/navigation.mjs
+          node capture/route-labels.mjs
           QUEUEKIND_VERIFY_CURRENT=1 node capture/record.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
@@ -31,6 +32,7 @@ jobs:
             filter-output/
             removal-output/
             navigation-output/
+            route-label-output/
             capture-output/
           retention-days: 3
 
