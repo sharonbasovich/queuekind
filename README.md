@@ -40,7 +40,7 @@ The build copies nine runtime files into `dist/`. No dependency installation is 
 6. Use All, Awaiting review, Reviewed or Held to focus the queue. Counts and request numbers stay tied to the full queue. Unconfirmed choices survive filter changes; exports and learning still use all reviewed requests, including hidden ones.
 7. Export reviewed requests to CSV before reloading or closing the page.
 
-To use your own examples, import a CSV with `text,label` columns: at least two routes and six unique examples per route. New requests use a `text` column and optional `id`. Remove identifying or sensitive information first. A new route requires a suitable imported training set, not a one-example class added during review.
+To use your own examples, import a CSV with `text,label` columns: at least two routes and six unique examples per route. New requests use a `text` column and optional `id`. IDs may contain up to 100 UTF-16 code units (most characters count as one; supplementary characters such as many emoji count as two). An overlong ID rejects the entire batch with its request-row number, counting data rows from 1 after the header; the current queue, numbering and removal undo remain unchanged. Valid IDs are never shortened, trimmed or normalized. CSV quoting and existing spreadsheet-formula neutralization still apply on export. Remove identifying or sensitive information first. A new route requires a suitable imported training set, not a one-example class added during review.
 
 ## What the evidence says
 
