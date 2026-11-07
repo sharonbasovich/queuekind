@@ -4,7 +4,7 @@ import {splitExamples,fit,predict,evaluate} from '../model.js';import {examples,
 const baseline=JSON.parse(readFileSync(new URL('./v2-baseline.json',import.meta.url),'utf8'));
 const s=splitExamples(examples),model=fit(s.train);const snapshot=()=>JSON.stringify({classes:[...model.classes].map(([l,c])=>[l,{...c,words:[...c.words]}]),vocab:[...model.vocab],n:model.n});const before=snapshot();
 const d=summarizeDiagnostics(s.test,text=>predict(model,text)),html=renderDiagnostics(d);
-assert.deepEqual({train:s.train,test:s.test,metrics:evaluate(model,s.test),predictions:[...requests,...s.test.map(r=>r.text)].map(t=>predict(model,t))},baseline,'v2 must preserve complete v1 model/split predictions');assert.equal(snapshot(),before,'diagnostics must not mutate model');
+assert.deepEqual({train:s.train,test:s.test,metrics:evaluate(model,s.test),predictions:[...requests,...s.test.map(r=>r.text)].map(t=>{const {explanation,...legacy}=predict(model,t);return legacy;})},baseline,'v2 must preserve complete v1 model/split predictions');assert.equal(snapshot(),before,'diagnostics must not mutate model');
 assert.equal(d.misses.length,s.test.length-evaluate(model,s.test).correct);assert.equal(d.matches.length,evaluate(model,s.test).correct);
 for(const p of d.pairs)assert.equal(p.count,evaluate(model,s.test).confusion[p.expected][p.suggested]);assert.equal(d.pairs.reduce((n,p)=>n+p.count,0),d.misses.length);
 assert.ok(html.indexOf('Inspect mismatches first')<html.indexOf('<details>'));assert.doesNotMatch(html,/<(?:button|input|select|a)\b/,'diagnostics must not expose training/copy actions');assert.match(html,/not verified ground truth/);assert.match(html,/Do not copy check-set rows into training/);

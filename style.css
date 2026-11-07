@@ -4,3 +4,13 @@
 
 .queue-views{margin-bottom:1rem;padding:1rem;border:1px solid #d8ded5;border-radius:12px;background:#fff}.queue-views label{display:block;font-weight:700;margin-bottom:.4rem}.queue-views select{width:100%;max-width:24rem}.queue-views .micro{margin:.5rem 0 0}
 @media(max-width:450px){.section-head{flex-wrap:wrap}.section-head .badge{white-space:normal;max-width:100%}.review-grid>*{min-width:0}}
+
+.score-evidence{margin:14px 0;padding:12px 14px;border:1px solid var(--line,#d6dcd8);border-radius:10px;font-size:.875rem;overflow-wrap:anywhere}
+.score-evidence summary{cursor:pointer;font-weight:700;min-height:24px}
+.score-evidence summary:focus-visible{outline:3px solid #176b52;outline-offset:4px}
+.score-evidence p{margin:12px 0 8px}
+.score-evidence ul{list-style:none;padding:0;margin:6px 0}
+.score-evidence li{display:flex;justify-content:space-between;gap:16px;padding:5px 0}
+.score-evidence strong{white-space:nowrap;font-variant-numeric:tabular-nums}
+.score-evidence .evidence-direction{font-weight:650}
+.score-evidence .evidence-totals{border-top:1px solid var(--line,#d6dcd8);margin-top:12px;padding-top:8px}
