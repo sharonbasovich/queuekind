@@ -15,7 +15,12 @@ export function validateExamples(rows) {
   if(!tokens(text).length) throw Error('Each example needs meaningful words, not only punctuation or stop words.');
   const key=fingerprint(text), old=unique.get(key);
   if(old&&old.label!==label) throw Error('The same request has conflicting labels. Resolve it before training.');
-  if(old) duplicates++; else unique.set(key,{text,label});
+  if(old) {
+   duplicates++;
+   // A feature-equivalent duplicate must not choose the split by arriving first.
+   // Use a locale-independent representative without changing unique-example splits.
+   if(text<old.text) unique.set(key,{text,label});
+  } else unique.set(key,{text,label});
  }
  const clean=[...unique.values()], counts=Object.create(null); for(const r of clean) counts[r.label]=(counts[r.label]||0)+1;
  if(Object.keys(counts).length<2) throw Error('Add at least two labels so the model can distinguish routes.');
