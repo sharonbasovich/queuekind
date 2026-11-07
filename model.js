@@ -63,7 +63,17 @@ export function predict(model,text) {
  // Evidence is a token's smoothed likelihood advantage versus the runner-up.
  const winner=model.classes.get(scores[0].label), other=model.classes.get(scores[1]?.label);
  const evidence=[...new Set(known)].map(word=>({word,weight:other?Math.log(((winner.words.get(word)||0)+1)/(winner.total+model.vocab.size))-Math.log(((other.words.get(word)||0)+1)/(other.total+model.vocab.size)):0})).filter(e=>e.weight>0).sort((a,b)=>b.weight-a.weight).slice(0,5).map(e=>e.word);
- return {scores,coverage,known:known.length,needsReview:reasons.length>0,reasons,evidence};
+ // Explain the existing computation; do not use this accounting to rank or score.
+ const counts=new Map();for(const word of known) counts.set(word,(counts.get(word)||0)+1);
+ const terms=other?[...counts].map(([word,count])=>{
+  const perOccurrence=Math.log(((winner.words.get(word)||0)+1)/(winner.total+model.vocab.size))-Math.log(((other.words.get(word)||0)+1)/(other.total+model.vocab.size));
+  return {word,count,perOccurrence,contribution:count*perOccurrence};
+ }):[];
+ const prior=other?Math.log(winner.docs/model.n)-Math.log(other.docs/model.n):0;
+ const explanation=other?{first:scores[0].label,second:scores[1].label,prior,terms,
+  total:prior+terms.reduce((sum,t)=>sum+t.contribution,0),scoreDifference:scores[0].score-scores[1].score,
+  known:known.length,unknown:all.length-known.length,processed:all.length,truncated:full.length-all.length}:null;
+ return {scores,coverage,known:known.length,needsReview:reasons.length>0,reasons,evidence,explanation};
 }
 export function evaluate(model,rows) {
  const labels=[...new Set([...model.classes.keys(),...rows.map(r=>r.label)])].sort(), confusion=Object.fromEntries(labels.map(l=>[l,Object.fromEntries(labels.map(k=>[k,0]))]));

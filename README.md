@@ -14,7 +14,7 @@ No API key, account, package installation or external dependency is needed. Use 
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8000 in your browser. ES modules need HTTP rather than opening the HTML directly. The runtime files are `index.html`, `style.css`, `app.js`, `model.js`, `csv.js`, `data.js` `diagnostics.js` and `queue-view.js`.
+Open http://127.0.0.1:8000 in your browser. ES modules need HTTP rather than opening the HTML directly. The runtime files are `index.html`, `style.css`, `app.js`, `model.js`, `csv.js`, `data.js`, `diagnostics.js`, `queue-view.js` and `score-evidence.js`.
 
 With a recent Node.js installation, run the tests or create a static distribution:
 
@@ -28,7 +28,7 @@ node qa/evaluation/run.mjs
 npm run build
 ```
 
-The build copies eight runtime files into `dist/`. No dependency installation is required.
+The build copies nine runtime files into `dist/`. No dependency installation is required.
 
 ## A five-minute walkthrough
 
@@ -96,3 +96,9 @@ One queue slot is reserved while Undo removal is available, so incoming requests
 ## Leaving a session
 
 QueueKind asks the browser to warn before leaving or reloading a nonempty session, including an unfinished request draft. Cancel the warning to keep working. Reset session has one explicit confirmation. Exporting reviewed decisions does not back up the remaining queue, trained model or draft, so it does not disable this warning. This is not persistence: browsers may suppress unload prompts, especially on mobile termination; keep original CSVs and export reviewed decisions before closing.
+
+## Inspect why the top two routes differ
+
+Each request has a keyboard-operable “Why these two routes?” disclosure. It shows up to four word contributions favoring each route, including repetition counts and opposing evidence, plus the unchanged class-prior contribution. Remaining known words are aggregated so the displayed components account for the total. Values are rounded additive log-score differences, not probabilities, causal explanations or proof of correctness. The model still cannot resolve intent or negation.
+
+`predict().explanation` retains every known-word contribution and unrounded totals; their sum matches the actual top-two log-score difference within floating-point tolerance. Known and unknown counts cover the first 500 content words; the separate truncated count covers words after that limit. Stop words and one-character tokens are excluded before this accounting. This read-only explanation does not change ranking, scores, warnings or human decisions.
