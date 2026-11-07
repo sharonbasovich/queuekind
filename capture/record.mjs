@@ -20,7 +20,7 @@ const verifyCurrent=process.env.QUEUEKIND_VERIFY_CURRENT==='1';
 assert.ok(!(verifyCurrent&&process.env.QUEUEKIND_FILM==='1'),'Current verification must not produce a film');
 const runtimeManifest=JSON.parse(await fs.readFile(new URL(verifyCurrent?'./verification-manifest.json':'./runtime-manifest.json',import.meta.url),'utf8'));
 assert.equal(runtimeManifest.algorithm,'sha256');
-assert.equal(runtimeManifest.reviewedAppCommit,verifyCurrent?'score-evidence-v1':'123cb39105e9bb368439d253922ca853c15c4044');
+assert.equal(runtimeManifest.reviewedAppCommit,verifyCurrent?'id-integrity-v1':'123cb39105e9bb368439d253922ca853c15c4044');
 const sourceHashes={};for(const file of ['index.html','app.js','model.js','csv.js','data.js','diagnostics.js','style.css',...(verifyCurrent?['queue-view.js','score-evidence.js']:[])]){
  const source=await fs.readFile(path.join(root,file)),built=await fs.readFile(path.join(root,'dist',file));
  assert.equal(sha(source),sha(built),`Build differs from source: ${file}`);sourceHashes[file]=sha(source);assert.equal(sourceHashes[file],runtimeManifest.files[file],`Unreviewed runtime changed: ${file}`);

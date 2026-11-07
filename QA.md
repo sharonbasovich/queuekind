@@ -32,3 +32,9 @@ Added confirmed removal of unreviewed requests and one-step undo. Reviewed/held 
 Verification: 22 Node tests including full-capacity, cancellation, second removal, session replacement, repeated undo, export-byte and model invariance. Existing adversarial, correction, lifecycle, diagnostics and 60-case synthetic evaluation remain unchanged. Browser regression `capture/removal.mjs` covers 1280/390px, keyboard confirmation/cancel, empty queue/undo focus, filter recovery, numbering and reviewed CSV invariance. Native cloud-browser cancellation and confirmation/undo checked separately. No classifier changes, new dependencies, automatic persistence or external transmission.
 
 Exact event checked from QueueKind's Submitted To link on November 3: ML Empowerment Build Challenge 4.0; 44 participants (not a team/submission count), start November 1; use earlier rules deadline December 1, 21:00 Pacific rather than overview 23:45. Technical implementation 30%, UX 15%. Existing entry and historical video preserved.
+
+## November 7: preserve imported request identity
+
+Request IDs longer than 100 UTF-16 code units now reject the whole batch with a request-row number, instead of being silently truncated. Valid IDs retain whitespace, punctuation and Unicode; existing CSV quoting and spreadsheet-formula neutralization remain in place.
+
+The dependency-free simulated lifecycle regression covers the 100/101-code-unit boundary, supplementary Unicode, colliding overlong prefixes, a valid row preceding an invalid row, unchanged queue/export/model/removal undo, stable numbering and exported UTF-8 bytes. This is not native/browser acceptance. Actual file-picker import and downloaded-file verification of this change remain pending; no browser check was run for this change.
